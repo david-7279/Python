@@ -1,20 +1,43 @@
 import random
 
-def play():
-    user = input("What's your choice?\n'r' for rock\n'p' for paper\n's' for scissors\n: ")
-    computer = random.choice(['r', 'p', 's'])
+# User input's
+def userInput():
+  user = input("What's your choice?\n'r' for rock\n'p' for paper\n's' for scissors\n: ").lower()
+  while user not in ['r', 'p', 's']:
+    print('Invalid character! Please, try again.')
+    user = input("What's your choice?\n'r' for rock\n'p' for paper\n's' for scissors\n: ").lower()
+  return user
 
-    if user == computer:
-      return 'It\'s a tie!'
+# Check if user is a winner
+def userWin(user, computer):
+  if (user == 'r' and computer == 's') or (user == 'p' and computer == 'r') or (user == 's' and computer == 'p'):
+    return True
+  else:
+    return False
 
-    if isWin(user, computer):
-      return'You Won!'
-
+# Print the result
+def result(user, computer):
+  if user == computer:
+    return 'It\'s a tie!'
+  elif userWin(user, computer):
+    return 'You won!'
+  else:
     return 'You lost!'
 
-def isWin(player, opponent):      
-    # Return true if player wins
-    if (player == 'r' and opponent == 's') or (player == 'p' and opponent == 'r') or (player == 's' and opponent == 'p'):
-      return True
+# Main program
+def main():
+  while True:
+    user = userInput()
+    computer = random.choice(['r', 'p', 's'])
+    gameResult = result(user, computer)
+    choices = {'r': 'rock', 'p': 'paper', 's': 'scissors'}
 
-print(play())
+    print(f'\nYou chose {choices[user]} and computer chose {choices[computer]}')
+    print(gameResult)
+    print('')
+
+    if gameResult == 'You won!':
+      break
+
+if __name__ == "__main__":
+  main()
