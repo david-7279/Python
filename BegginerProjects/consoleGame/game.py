@@ -3,17 +3,16 @@ import os
 
 # Cleart the console
 def clear_screen():
+  sleep(1)
   os.system('cls' if os.name == 'nt' else 'clear')
-  sleep(0.5)
 
 # PLAYER STATUS
 player = [
-  {"healh": 0, "money": 50, "weapon": "hand", "power": 0, "monsters": 0, "boss": 0}
+  {"health": 100, "money": 5, "weapon": "hand", "power": 5, "monsters": 0, "boss": 0}
 ]
 
 # SHOP ITEMS
 weapon_items = [
-  {"name": "hand", "category": "none", "power": 5, "health": 50, "price": 0},
   {"name": "stick", "category": "wood", "power": 10, "health": 100, "price": 10},
   {"name": "wood sword", "category": "wood", "power": 15, "health": 100, "price": 15},
   {"name": "bow", "category": "wood", "power": 25, "health": 50, "price": 20},
@@ -74,6 +73,9 @@ class Game:
     choices = [1, 2, 0]
     while True:
       try:
+        print('Player status')
+        print(f'Player health: {player[0]['health']}, Player money: ${player[0]['money']}, Player weapon: {player[0]['weapon']}, Player Power: {player[0]['power']}\n')
+
         print('Shopping list')
         print('1. shopping health items')
         print('2. shopping weapons')
@@ -81,54 +83,84 @@ class Game:
 
         option = int(input('Choose an option: '))
         clear_screen()
+
         if option in choices:
           # HEALTH SELECTED
           if option == 1:
-            if player['money'] <= health_items['price']:
-              for index, health in enumerate(health_items, start=1):
-                print(f'[{index}] {health['name']}, health gain [{health['health']}] costs ${health['price']}')
-              print('[0] go back')
+            print('Player status')
+            print(f'Player health: {player[0]['health']} Player money: ${player[0]['money']}\n')
+
+            available_health_items = [item for item in health_items if item['price'] <= player[0]['money']]
+
+            if not available_health_items:
+              print("You don't have enough money to buy any health items.\n")
+              sleep(2)
+              clear_screen()
+              continue
+
+            print('Health potions available to buy:')
+            for index, health in enumerate(available_health_items, start=1):
+              if health['price'] <= player[0]['money']:
+                print(f'[{index}] {health["name"]}, health gain [{health["health"]}] costs ${health["price"]}')
+            print('[0] Go back')
               
             item_index = int(input('Choose an health potion: '))
             if 1 <= item_index <= len(health_items):
               selected_helth = health_items[item_index - 1]
-              if selected_helth['price'] > player['money']:
-                print(f'Not enough money to pursache this item.\n')
+              if selected_helth['price'] > player[0]['money']:
+                print(f'Not enough money to purchase this item.\n')
+                return
               else:
-                print(f'Selected helth item: {selected_helth['name']}')
-                print('Item pursached sucessfully!\n')
-                player['money'] -= selected_helth['price']
-                player['health'] += selected_helth['health']
-                print(f'Player status: \nHealth: {player['health']}, Money:{player['money']}\n')
+                print(f'\nSelected helth item: {selected_helth['name']}')
+                player[0]['money'] -= selected_helth['price']
+                player[0]['health'] += selected_helth['health']
+                print('Item purchased successfully!\n')
+                sleep(2)
+                clear_screen()
             else:
               print(f'Invalid item: {item_index}. Please, choose an valid item!\n')
+              sleep(2)
               clear_screen()
-              continue   
-
+              continue
+                 
           # WEAPON SELECTED       
           elif option == 2:
-            if weapon_items['price'] <= player['money']:
-              for index, weapon in enumerate(weapon_items, start=1):
-                print(f'[{index}] {weapon['name']}, weapon power {weapon['power']} ({weapon['category']}), weapon health {weapon['health']} costs ${weapon['price']}')
-              print('[0] go back')
+            print('Player status')
+            print(f'Player money: ${player[0]['money']}, Player weapon: {player[0]['weapon']}, Player Power: {player[0]['power']}\n')
 
-              item_index = int(input('Choose an weapon: '))
-              if 1 <= item_index <= len(weapon_items):
-                selected_weapon = weapon_items[item_index - 1]
-                if selected_weapon['price'] > player['money']:
-                  print(f'No enough money to purshace this item.\n')
-                else:
-                  print(f'Seleted weapon: {selected_weapon['name']}')
-                  print('Item purshaced sucessfully!\n')
-                  player['money'] -= selected_weapon['price']
-                  player['weapon'] = selected_weapon['name']
-                  player['power'] = selected_weapon['power']
+            available_weapon_items = [item for item in weapon_items if item['price'] <= player[0]['money']]
+
+            if not available_weapon_items:
+              print("You don't have enough money to buy any weapon items.\n")
+              sleep(2)
+              clear_screen()
+              continue
+
+            print('Weapons available to buy:')
+            for index, weapon in enumerate(available_weapon_items, start=1):
+              if weapon['price'] <= player[0]['money']:
+                print(f'[{index}] {weapon['name']}, weapon power {weapon['power']} ({weapon['category']}), weapon health {weapon['health']} costs ${weapon['price']}')
+            print('[0] go back')
+
+            item_index = int(input('Choose an weapon: '))
+            if 1 <= item_index <= len(weapon_items):
+              selected_weapon = weapon_items[item_index - 1]
+              if selected_weapon['price'] > player[0]['money']:
+                print(f'No enough money to purshace this item.\n')
               else:
+                  print(f'\nSeleted weapon: {selected_weapon['name']}')
+                  player[0]['money'] -= selected_weapon['price']
+                  player[0]['weapon'] = selected_weapon['name']
+                  player[0]['power'] = selected_weapon['power']
+                  print('Item purshaced sucessfully!\n')
+                  sleep(2)
+                  clear_screen()
+            else:
                 print(f'Invalid item: {item_index}. Please, choose an valid item!\n')
+                sleep(2)
                 clear_screen()
                 continue
-            else:
-              print(f'Not enough money: ${player['money']} to purshce an weapon!\n')
+
           # EXITING THE SHOP
           elif option == 0:
             print('Exiting the shop\n')
