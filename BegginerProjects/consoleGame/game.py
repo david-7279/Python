@@ -38,15 +38,16 @@ health_items = [
 ]
 
 # TOWNS
-town = [
-  {"name": "water town"},
-  {"name": "olympsus town"},
-  {"name": "dark town"},
-  {"name": "montain town"},
-  {"name": "cloud town"},
-  {"name": "elf town"},
-  {"name": "tokyo town"},
+towns = [
+  {"name": "Water Town", "description": "they seem cute but they are dangerous"},
+  {"name": "Olympus Town", "description": "the monsters here are strong and wise"},
+  {"name": "Dark Town", "description": "a spooky place, home of dark creatures"},
+  {"name": "Mountain Town", "description": "monsters live in the high peaks"},
+  {"name": "Cloud Town", "description": "monsters float in the skies"},
+  {"name": "Elf Town", "description": "a peaceful town but full of mysterious elves"},
+  {"name": "Tokyo Town", "description": "a modern town with technological monsters"}
 ]
+current_town_index = 0
 
 # MONSTER STATUS
 monsters = [
@@ -63,7 +64,6 @@ monsters = [
 boss = [
   {"name": "evil fox", "health": 200, "power": 110}
 ]
-
 
 class Game:
   def __init__(self):
