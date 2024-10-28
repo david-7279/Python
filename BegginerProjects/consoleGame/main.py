@@ -23,7 +23,7 @@ def main():
     clear_screen()
     game = Game(towns)
 
-    print('Hello to Console Game. The main objective is to defeat the dangerous fox!')
+    print('Welcome to the Console Game. The main objective is to defeat the dangerous fox!')
 
     sleep(2)
     game.main_menu()

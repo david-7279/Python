@@ -67,16 +67,16 @@ class Game:
         description = current_town['description']
 
         print(f'Welcome to {town_name} the main monster here is a {description}.\n')
-        print('1. Go to the shop')
+        print('1. go to the shop')
         # Show enxt town if exist other town
         if self.current_town_index < len(self.towns) - 1:
-          print(f'2. Go to the next town ({self.towns[self.current_town_index + 1]['name']})')
+          print(f'2. go to the next town ({self.towns[self.current_town_index + 1]['name']})')
         # Show previous town if exists the user navigation between towns
         if self.current_town_index > 0:
-          print(f'3. Go to the next town ({self.towns[self.current_town_index - 1]['name']})')
-        print('4. Go to the cave')
-        print('5. Go fight the boos')
-        print('0. Leave the program')
+          print(f'3. go to the next town ({self.towns[self.current_town_index - 1]['name']})')
+        print('4. go to the cave')
+        print('5. go fight the boos')
+        print('0. leave the program')
 
         option = int(input('Choose an option: '))
         clear_screen()
@@ -88,7 +88,7 @@ class Game:
           elif option == 3:
             self.prev_town()
           elif option == 4:
-            print("Going to fight the monsters... (função não implementada ainda)")
+            self.fight_monster()
           elif option == 5:
             print("Going to fight the boss... (função não implementada ainda)")
           elif option == 0:
@@ -115,7 +115,7 @@ class Game:
         print('Shopping list')
         print('1. shopping health items')
         print('2. shopping weapons')
-        print('0. go back')
+        print('0. leave the shop')
 
         option = int(input('Choose an option: '))
         clear_screen()
@@ -138,14 +138,14 @@ class Game:
             for index, health in enumerate(available_health_items, start=1):
               if health['price'] <= player[0]['money']:
                 print(f'[{index}] {health["name"]}, health gain [{health["health"]}] costs ${health["price"]}')
-            print('[0] Go back')
+            print('[0] go back')
               
             item_index = int(input('Choose an health potion: '))
             if 1 <= item_index <= len(health_items):
               selected_helth = health_items[item_index - 1]
               if selected_helth['price'] > player[0]['money']:
                 print(f'Not enough money to purchase this item.\n')
-                return
+                return  
               else:
                 print(f'\nSelected helth item: {selected_helth['name']}')
                 player[0]['money'] -= selected_helth['price']
@@ -153,6 +153,11 @@ class Game:
                 print('Item purchased successfully!\n')
                 sleep(2)
                 clear_screen()
+            elif item_index == 0:
+                clear_screen()
+                print('Leaving the shop ... ')
+                clear_screen()
+                return
             else:
               print(f'Invalid item: {item_index}. Please, choose an valid item!\n')
               sleep(2)
@@ -183,6 +188,8 @@ class Game:
               selected_weapon = weapon_items[item_index - 1]
               if selected_weapon['price'] > player[0]['money']:
                 print(f'No enough money to purshace this item.\n')
+              
+                return
               else:
                   print(f'\nSeleted weapon: {selected_weapon['name']}')
                   player[0]['money'] -= selected_weapon['price']
@@ -191,6 +198,11 @@ class Game:
                   print('Item purshaced sucessfully!\n')
                   sleep(2)
                   clear_screen()
+            elif item_index == 0:
+              clear_screen()
+              print('Leaving the shop ... ')
+              clear_screen()
+              return
             else:
                 print(f'Invalid item: {item_index}. Please, choose an valid item!\n')
                 sleep(2)
@@ -222,6 +234,7 @@ class Game:
     else:
         print("You are already in the last town.")
 
+
   def prev_town(self):
     if self.current_town_index > 0:
         clear_screen()
@@ -230,3 +243,41 @@ class Game:
         clear_screen()
     else:
         print("You are already in the first town.")
+
+
+  def fight_monster(self):
+    choices = [1, 2, 0]
+    while True:
+      try:
+        print('Monster status')
+        print(f'Name: {monsters[self.current_town_index]['name']}, Health: {monsters[self.current_town_index]['health']}, Power: {monsters[self.current_town_index]['power']}, Reward: ${monsters[self.current_town_index]['reward']}\n')
+      
+        print('1. go to the shop')
+        print('2. Go fight the monsters')
+        print('0. leave the cave')
+
+        option = int(input('Choose an option: '))
+        clear_screen()
+
+        if option in choices:
+          if option == 1:
+            clear_screen()
+            print('Going to the shop ... ')
+            clear_screen()
+            self.shop()
+          elif option == 2:
+            pass
+          elif option == 0:
+            clear_screen()
+            print('Exiting the cave ...')
+            clear_screen()
+            clear_screen()
+            return
+        else:
+          print(f'Invalid option: {option}. Please, choose an valid option.\n')
+          continue
+          
+      except ValueError:
+        print('Invalid input. Please, try again.\n')
+      except Exception as e:
+        print(f'An error ocurred: {e}. Please, try again.\n')
