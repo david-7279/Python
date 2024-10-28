@@ -68,13 +68,12 @@ class Game:
 
         print(f'Welcome to {town_name} the main monster here is a {description}.\n')
         print('1. Go to the shop')
-
         # Show enxt town if exist other town
         if self.current_town_index < len(self.towns) - 1:
           print(f'2. Go to the next town ({self.towns[self.current_town_index + 1]['name']})')
+        # Show previous town if exists the user navigation between towns
         if self.current_town_index > 0:
           print(f'3. Go to the next town ({self.towns[self.current_town_index - 1]['name']})')
-        # Show previous town if exists the user navigation between towns
         print('4. Go to the cave')
         print('5. Go fight the boos')
         print('0. Leave the program')
@@ -87,8 +86,10 @@ class Game:
           elif option == 2:
             self.next_town()
           elif option == 3:
-            print("Going to the cave... (função não implementada ainda)")
+            self.prev_town()
           elif option == 4:
+            print("Going to fight the monsters... (função não implementada ainda)")
+          elif option == 5:
             print("Going to fight the boss... (função não implementada ainda)")
           elif option == 0:
             print('Goodbye Adventure!')
@@ -213,8 +214,19 @@ class Game:
 
 
   def next_town(self):
-    pass
-
+    if self.current_town_index < len(self.towns) - 1:
+        clear_screen()
+        print('Traveling to the next town ... ')
+        self.current_town_index += 1
+        clear_screen()
+    else:
+        print("You are already in the last town.")
 
   def prev_town(self):
-    pass
+    if self.current_town_index > 0:
+        clear_screen()
+        print('Traveling to the previous town ... ')
+        self.current_town_index -= 1
+        clear_screen()
+    else:
+        print("You are already in the first town.")
