@@ -37,18 +37,6 @@ health_items = [
   {"name": "big potion health", "category": "item", "health": 70, "price": 50},
 ]
 
-# TOWNS
-towns = [
-  {"name": "Water Town", "description": "they seem cute but they are dangerous"},
-  {"name": "Olympus Town", "description": "the monsters here are strong and wise"},
-  {"name": "Dark Town", "description": "a spooky place, home of dark creatures"},
-  {"name": "Mountain Town", "description": "monsters live in the high peaks"},
-  {"name": "Cloud Town", "description": "monsters float in the skies"},
-  {"name": "Elf Town", "description": "a peaceful town but full of mysterious elves"},
-  {"name": "Tokyo Town", "description": "a modern town with technological monsters"}
-]
-current_town_index = 0
-
 # MONSTER STATUS
 monsters = [
   {"name": "slime", "health": 10, "power": 10, "reward": 1},
@@ -66,8 +54,42 @@ boss = [
 ]
 
 class Game:
-  def __init__(self):
-    pass
+  def __init__(self, towns):
+    self.towns = towns
+    self.current_town_index = 0
+
+  def main_menu(self):
+    choices = [1, 2, 3, 4, 0]
+    while True:
+      try:
+        current_town = self.towns[self.current_town_index]
+        print(f'Welcome to {current_town['name']} the main monster here is a {current_town['description']}.\n')
+        print('1. Go to the shop')
+        print(f'2. Go to the next town ({self.towns[self.current_town_index + 1]['name']})')
+        print('3. Go to the cave')
+        print('4. Go fight the boos')
+        print('0. Leave the program')
+
+        option = int(input('Choose an option: '))
+        clear_screen()
+        if option in choices:
+          if option == 1:
+            self.shop()
+          elif option == 2:
+            self.next_town()
+          elif option == 3:
+            print("Going to the cave... (função não implementada ainda)")
+          elif option == 4:
+            print("Going to fight the boss... (função não implementada ainda)")
+          else:
+            print('Goodbye Adventure!')
+            break
+        else:
+          print(f'Invalid option: {option}. Please, write a valid option.\n')
+      except ValueError:
+        print('Invalid input. Please, try again.\n')
+      except Exception as e:
+        print(f'An error occurred: {e}. Please, try again.\n')
 
   def shop(self):
     choices = [1, 2, 0]
@@ -175,3 +197,7 @@ class Game:
         print('Invalid input. Please, try again.\n')
       except Exception as e:
         print(f'An error ocurred: {e}. Please, try again.\n')
+
+
+  def next_town(self):
+    pass
