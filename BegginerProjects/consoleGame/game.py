@@ -8,49 +8,52 @@ def clear_screen():
 
 # PLAYER STATUS
 player = [
-  {"health": 100, "money": 5, "weapon": "hand", "power": 5, "monsters": 0, "boss": 0}
+  {"health": 100, "money": 10, "weapon": "hand", "power": 5, "monsters": 0, "boss": 0}
 ]
 
 # SHOP ITEMS
 weapon_items = [
-  {"name": "stick", "category": "wood", "power": 10, "health": 100, "price": 10},
-  {"name": "wood sword", "category": "wood", "power": 15, "health": 100, "price": 15},
-  {"name": "bow", "category": "wood", "power": 25, "health": 50, "price": 20},
-  {"name": "stone sword", "category": "sword", "power": 20, "health": 110, "price": 20},
-  {"name": "metal sword", "category": "sword", "power": 25, "health": 90, "price": 23},
-  {"name": "double metal sword", "category": "sowrd", "power": 35, "health": 150, "price": 30},
-  {"name": "katana", "category": "katana", "power": 45, "health": 100, "price": 30},
-  {"name": "bow with mythic magic", "category": "magic", "power": 55, "health": 50, "price": 45},
-  {"name": "bow with fire magic", "category": "magic", "power": 55, "health": 50, "price": 45},
-  {"name": "bow with ice magic", "category": "magic", "power": 55, "health": 50, "price": 45},
-  {"name": "bow with dark magic", "category": "magic", "power": 60, "health": 40, "price": 45},
-  {"name": "santoryu", "category": "katana", "power": 70, "health": 200, "price": 60},
-  {"name": "santoryu with dark magic", "category": "katana", "power": 90, "health": 120, "price": 60},
-  {"name": "mythical dark magic", "category": "magic", "power": 120, "health": 120, "price": 120},
-  {"name": "katana mythical dark magic", "category": "magic", "power": 180, "health": 150, "price": 200},
-  {"name": "santoryu mythical dark magic", "category": "magic", "power": 200, "health": 100, "price": 220},
+    {"name": "stick", "category": "wood", "power": 10, "price": 10},
+    {"name": "wood sword", "category": "wood", "power": 15, "price": 15},
+    {"name": "bow", "category": "wood", "power": 20, "price": 20},
+
+    {"name": "stone sword", "category": "sword", "power": 20, "price": 20},
+    {"name": "metal sword", "category": "sword", "power": 25, "price": 25},
+    {"name": "double metal sword", "category": "sword", "power": 35, "price": 30},
+
+    {"name": "katana", "category": "katana", "power": 45, "price": 30},
+    {"name": "santoryu", "category": "katana", "power": 70, "price": 60},
+    {"name": "santoryu with dark magic", "category": "katana", "power": 90, "price": 80},
+
+    {"name": "bow with mythic magic", "category": "magic", "power": 55, "price": 60},
+    {"name": "bow with fire magic", "category": "magic", "power": 55, "price": 60},
+    {"name": "bow with ice magic", "category": "magic", "power": 55, "price": 60},
+    {"name": "bow with dark magic", "category": "magic", "power": 60, "price": 60},
+    {"name": "mythical dark magic", "category": "magic", "power": 120, "price": 90},
+    {"name": "katana mythical dark magic", "category": "magic", "power": 180, "price": 150},
+    {"name": "santoryu mythical dark magic", "category": "magic", "power": 200, "price": 220},
 ]
 
 health_items = [
   {"name": "small potion health", "category": "item", "health": 15, "price": 5},
-  {"name": "medium potion health", "category": "item", "health": 45, "price": 35},
-  {"name": "big potion health", "category": "item", "health": 70, "price": 50},
+  {"name": "medium potion health", "category": "item", "health": 50, "price": 35},
+  {"name": "big potion health", "category": "item", "health": 75, "price": 50},
 ]
 
 # MONSTER STATUS
 monsters = [
-  {"name": "slime", "health": 10, "power": 10, "reward": 1},
-  {"name": "zombie", "health": 15, "power": 20, "reward": 2},
-  {"name": "vampire", "health": 20, "power": 30, "reward": 2},
-  {"name": "werewolf", "health": 25, "power": 40, "reward": 5},
-  {"name": "goblin", "health": 30, "power": 50, "reward": 5},
-  {"name": "gnome", "health": 40, "power": 60, "reward": 7},
-  {"name": "oni", "health": 60, "power": 70, "reward": 10},
+  {"name": "slime", "health": 10, "power": 10, "reward": 5},
+  {"name": "zombie", "health": 15, "power": 20, "reward": 10},
+  {"name": "vampire", "health": 20, "power": 30, "reward": 15},
+  {"name": "werewolf", "health": 25, "power": 40, "reward": 25},
+  {"name": "goblin", "health": 30, "power": 50, "reward": 30},
+  {"name": "gnome", "health": 40, "power": 60, "reward": 45},
+  {"name": "oni", "health": 60, "power": 70, "reward": 60},
 ]
 
 # BOSS STATUS
 boss = [
-  {"name": "evil fox", "health": 200, "power": 110}
+  {"name": "evil fox", "health": 200, "power": 120}
 ]
 
 class Game:
@@ -90,7 +93,7 @@ class Game:
           elif option == 4:
             self.fight_monster()
           elif option == 5:
-            print("Going to fight the boss... (função não implementada ainda)")
+            print("Going to fight the boss... (feature not implemented yet)")
           elif option == 0:
             print('Goodbye Adventure!')
             break
@@ -180,7 +183,7 @@ class Game:
             print('Weapons available to buy:')
             for index, weapon in enumerate(available_weapon_items, start=1):
               if weapon['price'] <= player[0]['money']:
-                print(f'[{index}] {weapon['name']}, weapon power {weapon['power']} ({weapon['category']}), weapon health {weapon['health']} costs ${weapon['price']}')
+                print(f'[{index}] {weapon['name']} ({weapon['category']}), weapon power {weapon['power']} costs ${weapon['price']}')
             print('[0] go back')
 
             item_index = int(input('Choose an weapon: '))
@@ -194,9 +197,9 @@ class Game:
                   print(f'\nSeleted weapon: {selected_weapon['name']}')
                   player[0]['money'] -= selected_weapon['price']
                   player[0]['weapon'] = selected_weapon['name']
-                  player[0]['power'] = selected_weapon['power']
+                  player[0]['power'] += selected_weapon['power']
                   print('Item purshaced sucessfully!\n')
-                  sleep(2)
+                  sleep(1.5)
                   clear_screen()
             elif item_index == 0:
               clear_screen()
@@ -250,38 +253,39 @@ class Game:
     while True:
       try:
         current_monster = monsters[self.current_town_index]
-        print('Monster status')
-        print(f'Name: {current_monster['name']}, Health: {current_monster['health']}, Power: {current_monster['power']}, Reward: ${current_monster['reward']}\n')
-      
-        print('1. go to the shop')
-        print('2. fight the monsters')
-        print('0. leave the cave')
+        print("Monster status")
+        print(f"Name: {current_monster['name']}, Health: {current_monster['health']}, Power: {current_monster['power']}, Reward: ${current_monster['reward']}\n")
 
-        option = int(input('Choose an option: '))
+        print("1. go to the shop")
+        print("2. fight the monsters")
+        print("0. leave the cave")
+
+        option = int(input("Choose an option: "))
         clear_screen()
 
         if option in choices:
           # GO TO THE SHOP
           if option == 1:
             clear_screen()
-            print('Going to the shop ... ')
+            print("Going to the shop ... ")
             clear_screen()
             self.shop()
+
           # FIGHT THE CAVE MONSTER
           elif option == 2:
             clear_screen()
             fight_choices = ['a', 'l']
             while True:
-              print('Player status')
-              print(f'Health: {player[0]['health']}, Weapon: {player[0]['weapon']}, Power: {player[0]['power']}\n')
+              print("Player status")
+              print(f"Health: {player[0]['health']}, Weapon: {player[0]['weapon']}, Power: {player[0]['power']}\n")
 
-              print('Monster status')
-              print(f'Name: {current_monster['name']}, Health: {current_monster['health']}, Power: {current_monster['power']}\n')
+              print("Monster status")
+              print(f"Name: {current_monster['name']}, Health: {current_monster['health']}, Power: {current_monster['power']}\n")
 
-              print('a. to attack')
-              print('l. leave the monster basement')
+              print("a. to attack")
+              print("l. leave the monster basement")
 
-              action = input('Choose an action: ').lower()
+              action = input("Choose an action: ").lower()
               if action in fight_choices:
                 # ATTACK THE MONSTER BASEMENT
                 if action == 'a':
@@ -290,57 +294,80 @@ class Game:
                   player_health = player[0]['health']
                   monster_power = current_monster['power']
                   monster_health = current_monster['health']
-
-                  if player_power > monster_power and player_health > monster_health:
-                    print(f'You defeat the {current_monster['name']}, congratulations!')
-                    player[0]['money'] += current_monster['reward']
-                    player[0]['health'] -= current_monster['power']
-                    player[0]['monsters'] += 1
-                    return
-
-                  else:
-                    print('\nYour current power and health is lower than the monster')
-                    confirmation = input('Are your sure you want to fight the monster (Yes/No)? ').lower()
+                  
+                  if player_power < monster_power or player_health < monster_health:
+                    print("Your current power and health is lower than the monster")
+                    confirmation = input("Are you sure you want to fight the monster (Yes/No)? ").lower()
 
                     if confirmation in ['yes', 'y']:
                       clear_screen()
-                      player[0]['money'] += current_monster['reward']
-                      player[0]['health'] -= current_monster['power']
-                      player[0]['monsters'] += 1
-                      print(f'You took some damage from {current_monster['name']}, but you defeat him!\n')
-                      clear_screen()
-                      continue
+                      while monster_health > 0:
+                        monster_health -= player_power
+                        player_health -= monster_power
+                        player[0]['health'] = player_health
+
+                        if monster_health <= 0:
+                          print(f"You took some damage from {current_monster['name']}, but you defeated him!\n")
+                          player[0]['money'] += current_monster['reward']
+                          player[0]['monsters'] += 1
+
+                          continue
+                        elif player_health <= 0:
+                          clear_screen()
+                          print(f"You died!\nYou fought bravely and defeated {player[0]['monsters']} monsters in total.")
+                          return
+
+                        clear_screen()
+                        continue
                     elif confirmation in ['no', 'n']:
                       clear_screen()
-                      print('Leaving the monster basement ... ')
+                      print("Leaving the monster basement ... ")
                       clear_screen()
                       return
+                    
                     else:
-                      print(f'Invalid confirmation: {confirmation}\n')
+                      print(f"Invalid confirmation: {confirmation}\n")
+                      clear_screen()
                       return
+                  
+                  else:
+                    while monster_health > 0:
+                      monster_health -= player_power
+                      player_health -= monster_power
+                      player[0]['health'] = player_health
+
+                      if monster_health <= 0:
+                        print(f"You defeated {current_monster['name']}!\n")
+                        player[0]['money'] += current_monster['reward']
+                        player[0]['monsters'] += 1
+                        continue
+                      elif player_health <= 0:
+                        clear_screen()
+                        print(f"You died!\nYou fought bravely and defeated {player[0]['monsters']} monsters in total.")
+                        return
 
                 # LEAVE THE MONSTER BASEMENT
                 elif action == 'l':
                   clear_screen()
-                  print('Leaving the monster basement ... ')
+                  print("Leaving the monster basement ... ")
                   clear_screen()
                   return
-              else:
-                print(f'Invalid action: {action}! Please, try again.\n')
-                clear_screen()
-                continue
+                else:
+                  print(f"Invalid action: {action}! Please, try again.\n")
+                  clear_screen()
+                  continue
           # LEAVE THE CAVE
           elif option == 0:
             clear_screen()
-            print('Exiting the cave ...')
-            clear_screen()
+            print("Exiting the cave ...")
             clear_screen()
             return
         else:
-          print(f'Invalid option: {option}. Please, choose an valid option.\n')
+          print(f"Invalid option: {option}. Please, choose a valid option.\n")
           continue
-          
+
       except ValueError:
-        print('Invalid input. Please, try again.\n')
+        print("Invalid input. Please, try again.\n")
       except Exception as e:
-        print(f'An error ocurred: {e}. Please, try again.\n')
+        print(f"An error occurred: {e}. Please, try again.\n")
+
