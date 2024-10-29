@@ -75,7 +75,7 @@ class Game:
         if self.current_town_index > 0:
           print(f'3. go to the next town ({self.towns[self.current_town_index - 1]['name']})')
         print('4. go to the cave')
-        print('5. go fight the boos')
+        print('5. fight the boss')
         print('0. leave the program')
 
         option = int(input('Choose an option: '))
@@ -211,7 +211,7 @@ class Game:
 
           # EXITING THE SHOP
           elif option == 0:
-            print('Exiting the shop\n')
+            print('Exiting the shop ...')
             clear_screen()
             return
           
@@ -249,24 +249,87 @@ class Game:
     choices = [1, 2, 0]
     while True:
       try:
+        current_monster = monsters[self.current_town_index]
         print('Monster status')
-        print(f'Name: {monsters[self.current_town_index]['name']}, Health: {monsters[self.current_town_index]['health']}, Power: {monsters[self.current_town_index]['power']}, Reward: ${monsters[self.current_town_index]['reward']}\n')
+        print(f'Name: {current_monster['name']}, Health: {current_monster['health']}, Power: {current_monster['power']}, Reward: ${current_monster['reward']}\n')
       
         print('1. go to the shop')
-        print('2. Go fight the monsters')
+        print('2. fight the monsters')
         print('0. leave the cave')
 
         option = int(input('Choose an option: '))
         clear_screen()
 
         if option in choices:
+          # GO TO THE SHOP
           if option == 1:
             clear_screen()
             print('Going to the shop ... ')
             clear_screen()
             self.shop()
+          # FIGHT THE CAVE MONSTER
           elif option == 2:
-            pass
+            clear_screen()
+            fight_choices = ['a', 'l']
+            while True:
+              print('Player status')
+              print(f'Health: {player[0]['health']}, Weapon: {player[0]['weapon']}, Power: {player[0]['power']}\n')
+
+              print('Monster status')
+              print(f'Name: {current_monster['name']}, Health: {current_monster['health']}, Power: {current_monster['power']}\n')
+
+              print('a. to attack')
+              print('l. leave the monster basement')
+
+              action = input('Choose an action: ').lower()
+              if action in fight_choices:
+                # ATTACK THE MONSTER BASEMENT
+                if action == 'a':
+                  clear_screen()
+                  player_power = player[0]['power']
+                  player_health = player[0]['health']
+                  monster_power = current_monster['power']
+                  monster_health = current_monster['health']
+
+                  if player_power > monster_power and player_health > monster_health:
+                    print(f'You defeat the {current_monster['name']}, congratulations!')
+                    player[0]['money'] += current_monster['reward']
+                    player[0]['health'] -= current_monster['power']
+                    player[0]['monsters'] += 1
+                    return
+
+                  else:
+                    print('\nYour current power and health is lower than the monster')
+                    confirmation = input('Are your sure you want to fight the monster (Yes/No)? ').lower()
+
+                    if confirmation in ['yes', 'y']:
+                      clear_screen()
+                      player[0]['money'] += current_monster['reward']
+                      player[0]['health'] -= current_monster['power']
+                      player[0]['monsters'] += 1
+                      print(f'You took some damage from {current_monster['name']}, but you defeat him!\n')
+                      clear_screen()
+                      continue
+                    elif confirmation in ['no', 'n']:
+                      clear_screen()
+                      print('Leaving the monster basement ... ')
+                      clear_screen()
+                      return
+                    else:
+                      print(f'Invalid confirmation: {confirmation}\n')
+                      return
+
+                # LEAVE THE MONSTER BASEMENT
+                elif action == 'l':
+                  clear_screen()
+                  print('Leaving the monster basement ... ')
+                  clear_screen()
+                  return
+              else:
+                print(f'Invalid action: {action}! Please, try again.\n')
+                clear_screen()
+                continue
+          # LEAVE THE CAVE
           elif option == 0:
             clear_screen()
             print('Exiting the cave ...')
