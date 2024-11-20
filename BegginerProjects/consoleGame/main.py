@@ -22,10 +22,8 @@ towns = [
 def main():
     clear_screen()
     game = Game(towns)
-
     print('Welcome to the Console Game. The main objective is to defeat the dangerous fox!')
-
-    sleep(2)
+    sleep(0.5)
     game.main_menu()
 
 # Call the main program
