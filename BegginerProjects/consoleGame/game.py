@@ -13,44 +13,44 @@ player = [
 
 # SHOP ITEMS
 weapon_items = [
-    {"name": "Stick", "category": "wood", "power": 7, "price": 10},
-    {"name": "Wood Sword", "category": "wood", "power": 8, "price": 15},
-    {"name": "Bow", "category": "wood", "power": 10, "price": 20},
+    {"name": "Stick", "category": "wood", "power": 6, "price": 5},
+    {"name": "Wood Sword", "category": "wood", "power": 7, "price": 7},
+    {"name": "Bow", "category": "wood", "power": 8, "price": 9},
 
-    {"name": "Stone Sword", "category": "sword", "power": 10, "price": 20},
-    {"name": "Metal Sword", "category": "sword", "power": 13, "price": 25},
-    {"name": "Double Metal Sword", "category": "sword", "power": 14, "price": 30},
+    {"name": "Stone Sword", "category": "sword", "power": 13, "price": 35},
+    {"name": "Metal Sword", "category": "sword", "power": 15, "price": 38},
+    {"name": "Double Metal Sword", "category": "sword", "power": 16, "price": 45},
 
-    {"name": "Katana", "category": "katana", "power": 14, "price": 30},
-    {"name": "Santoryu", "category": "katana", "power": 18, "price": 60},
-    {"name": "Santoryu Dark Magic", "category": "katana", "power": 30, "price": 70},
+    {"name": "Katana", "category": "katana", "power": 18, "price": 90},
+    {"name": "Santoryu", "category": "katana", "power": 20, "price": 97},
+    {"name": "Santoryu Dark Magic", "category": "katana", "power": 23, "price": 120},
 
-    {"name": "Bow Mythic Magic", "category": "magic", "power": 20, "price": 62},
-    {"name": "Bow Fire Magic", "category": "magic", "power": 22, "price": 64},
-    {"name": "Bow Ice Magic", "category": "magic", "power": 25, "price": 66},
-    {"name": "Bow Dark Magic", "category": "magic", "power": 28, "price": 68},
-    {"name": "Mythical Dark magic", "category": "magic", "power": 35, "price": 90},
-    {"name": "Katana Mythical Dark Magic", "category": "magic", "power": 38, "price": 150},
-    {"name": "Santoryu Mythical Dark Magic", "category": "magic", "power": 45, "price": 220},
+    {"name": "Bow Mythic Magic", "category": "magic", "power": 28, "price": 189},
+    {"name": "Bow Fire Magic", "category": "magic", "power": 34, "price": 197},
+    {"name": "Bow Ice Magic", "category": "magic", "power": 38, "price": 218},
+    {"name": "Bow Dark Magic", "category": "magic", "power": 42, "price": 250},
+
+    {"name": "Mythical Dark magic", "category": "magic", "power": 60, "price": 575},
+    {"name": "Katana Mythical Dark Magic", "category": "magic", "power": 66, "price": 670},
+    {"name": "Santoryu Mythical Dark Magic", "category": "magic", "power": 80, "price": 975},
 ]
 
 health_items = [
-  {"name": "tiniest potion health", "category": "item", "health": 10, "price": 5},
-  {"name": "small potion health", "category": "item", "health": 30, "price": 25},
-  {"name": "medium potion health", "category": "item", "health": 55, "price": 35},
-  {"name": "big potion health", "category": "item", "health": 75, "price": 45},
-  {"name": "maxium potion health", "category": "item", "health": 100, "price": 50},
+  {"name": "small potion health", "category": "item", "health": 30, "price": 20},
+  {"name": "medium potion health", "category": "item", "health": 50, "price": 45},
+  {"name": "big potion health", "category": "item", "health": 120, "price": 95},
+  {"name": "maxium potion health", "category": "item", "health": 200, "price": 140},
 ]
 
 # MONSTER STATUS
 monsters = [
-  {"name": "Slime", "health": 7, "original_health": 7, "power": 6, "reward": 10},
+  {"name": "Slime", "health": 7, "original_health": 7, "power": 6, "reward": 4},
   {"name": "Zombie", "health": 14, "original_health": 14, "power": 10, "reward": 15},
-  {"name": "Vampire", "health": 20, "original_health": 20, "power": 18, "reward": 20},
-  {"name": "Werewolf", "health": 26, "original_health": 26, "power": 22, "reward": 25},
-  {"name": "Goblin", "health": 39, "original_health": 39, "power": 35, "reward": 30},
-  {"name": "Gnome", "health": 44, "original_health": 44, "power": 40, "reward": 50},
-  {"name": "Oni", "health": 55, "original_health": 55, "power": 65, "reward": 70},
+  {"name": "Vampire", "health": 20, "original_health": 20, "power": 18, "reward": 23},
+  {"name": "Werewolf", "health": 26, "original_health": 26, "power": 22, "reward": 29},
+  {"name": "Goblin", "health": 39, "original_health": 39, "power": 35, "reward": 35},
+  {"name": "Gnome", "health": 44, "original_health": 44, "power": 40, "reward": 43},
+  {"name": "Oni", "health": 55, "original_health": 55, "power": 65, "reward": 62},
 ]
 
 # BOSS STATUS
@@ -170,7 +170,7 @@ class Game:
     available_health_items = [item for item in health_items if item['price'] <= player[0]['money']]
     if not available_health_items:
       print("You don't have enough money to buy any health items.")
-      input('Press any key to continue ...')
+      input('Press enter to continue...')
       clear_screen()
       return
 
@@ -185,7 +185,7 @@ class Game:
       selected_health = available_health_items[item_index - 1]
       if selected_health['price'] > player[0]['money']:
         print('You don\'t have enough money to purchase this item.')
-        input('Press any key to continue ...')
+        input('Press enter to continue...')
         clear_screen()
         return
       else:
@@ -232,7 +232,7 @@ class Game:
     available_weapons = [weapon for weapon in weapon_items if weapon['price'] <= player[0]['money']]
     if not available_weapons:
       print("You don't have enough money to buy any weapons.")
-      input('Press any key to continue ...')
+      input('Press enter to continue...')
       clear_screen()
       return
 
@@ -255,10 +255,11 @@ class Game:
           try:
             confirmation = input('Are you sure want to buy this item (Yes/No)? ').lower()
             if confirmation in ['yes', 'y']:
+              # HANDLE CURRENT POWER VS POWER THAT PLAYER BOUGHT
               player[0]['money'] -= selected_weapon['price']
               player[0]['weapon'] = selected_weapon['name']
-              player[0]['power'] += selected_weapon['power']
-              print(f'You bought {selected_weapon["name"]} and gained {selected_weapon["power"]} power.\n')
+              player[0]['power'] = selected_weapon['power']
+              print(f'You bought {selected_weapon["name"]} and your current power is {selected_weapon["power"]}.\n')
               input('Press enter to continue...')
               clear_screen()
               return
@@ -298,6 +299,8 @@ class Game:
         clear_screen()
     else:
         print("You are already in the last town.")
+        input('Press enter to continue...')
+        clear_screen()
 
 
   def prev_town(self):
@@ -307,6 +310,8 @@ class Game:
         clear_screen()
     else:
         print("You are already in the first town.")
+        input('Press enter to continue...')
+        clear_screen()
 
 
   def calculate_damage_taken(self, attacker_power, monster_power):
