@@ -7,9 +7,7 @@ def clear_screen():
   os.system('cls' if os.name == 'nt' else 'clear')
 
 # PLAYER STATUS
-player = [
-  {"health": 100, "money": 15, "weapon": "Hand", "power": 5, "monsters": 0, "boss": 0}
-]
+player = {"health": 100, "money": 15, "weapon": "Hand", "power": 5, "monsters": 0, "boss": 0}
 
 # SHOP ITEMS
 weapon_items = [
@@ -33,8 +31,11 @@ weapon_items = [
     {"name": "Mythical Dark magic", "category": "magic", "power": 60, "price": 575},
     {"name": "Katana Mythical Dark Magic", "category": "magic", "power": 66, "price": 670},
     {"name": "Santoryu Mythical Dark Magic", "category": "magic", "power": 80, "price": 975},
+
+    {"name": "Santoryu Mythical Dark Magic & Light Magic", "category": "magic", "power": 125, "price": 1200},
 ]
 
+# HEALTH ITEMS
 health_items = [
   {"name": "small potion health", "category": "item", "health": 30, "price": 20},
   {"name": "medium potion health", "category": "item", "health": 50, "price": 45},
@@ -54,9 +55,8 @@ monsters = [
 ]
 
 # BOSS STATUS
-boss = [
-  {"name": "evil fox", "health": 200, "power": 120}
-]
+boss = {"name": "Evil Fox", "health": 250, "power": 120}
+
 
 class Game:
   def __init__(self, towns):
@@ -96,7 +96,7 @@ class Game:
           elif option == 4:
             self.fight_monster()
           elif option == 5:
-            print("Going to fight the boss... (feature not implemented yet)")
+            self.boss()
           elif option == 0:
             while True:
               confirmation = input('Are you sure you want to leave the program (Yes/No)? ')
@@ -124,19 +124,17 @@ class Game:
         print('Invalid input. Please, try again.\n')
         input('Press enter to continue...')
         clear_screen()
-        continue
       except Exception as e:
         print(f'An error occurred: {e}. Please, try again.\n')
         input('Press enter to continue...')
         clear_screen()
-        continue
 
 
   def shop(self):
     choices = [1, 2, 0]
     while True:
       try:
-        print(f'Player status\nHealth: {player[0]["health"]}, Weapon: {player[0]["weapon"]}, Power: {player[0]["power"]}, Money: ${player[0]["money"]}\n')
+        print(f'Player status\nHealth: {player["health"]}, Weapon: {player["weapon"]}, Power: {player["power"]}, Money: ${player["money"]}\n')
 
         print('1. shop health items')
         print('2. shop weapons')
@@ -167,14 +165,14 @@ class Game:
 
 
   def shop_health_items(self):
-    available_health_items = [item for item in health_items if item['price'] <= player[0]['money']]
+    available_health_items = [item for item in health_items if item['price'] <= player['money']]
     if not available_health_items:
       print("You don't have enough money to buy any health items.")
       input('Press enter to continue...')
       clear_screen()
       return
 
-    print(f'Player status\nHealth: {player[0]['health']}, Money: ${player[0]['money']}\n')
+    print(f'Player status\nHealth: {player['health']}, Money: ${player['money']}\n')
     print('Health potions available to buy:')
     for index, health in enumerate(available_health_items, start=1):
       print(f'[{index}] {health["name"]}, health gain [{health["health"]}], price ${health["price"]}')
@@ -183,7 +181,7 @@ class Game:
     item_index = int(input('Choose a health potion: '))
     if 1 <= item_index <= len(available_health_items):
       selected_health = available_health_items[item_index - 1]
-      if selected_health['price'] > player[0]['money']:
+      if selected_health['price'] > player['money']:
         print('You don\'t have enough money to purchase this item.')
         input('Press enter to continue...')
         clear_screen()
@@ -193,8 +191,8 @@ class Game:
           try:
             confirmation = input('Are you sure want to buy this item (Yes/No)? ').lower()
             if confirmation in ['yes', 'y']:
-              player[0]['money'] -= selected_health['price']
-              player[0]['health'] += selected_health['health']
+              player['money'] -= selected_health['price']
+              player['health'] += selected_health['health']
               print(f'You bought {selected_health["name"]} and gained {selected_health["health"]} health.\n')
               input('Press enter to continue...')
               clear_screen()
@@ -229,14 +227,14 @@ class Game:
 
 
   def shop_weapons(self):
-    available_weapons = [weapon for weapon in weapon_items if weapon['price'] <= player[0]['money']]
+    available_weapons = [weapon for weapon in weapon_items if weapon['price'] <= player['money'] and weapon['power'] > player['power']]
     if not available_weapons:
       print("You don't have enough money to buy any weapons.")
       input('Press enter to continue...')
       clear_screen()
       return
 
-    print(f'Player status\nWeapon: {player[0]['weapon']}, Power: {player[0]['power']}, Money: ${player[0]['money']}\n')
+    print(f'Player status\nWeapon: {player['weapon']}, Power: {player['power']}, Money: ${player['money']}\n')
     print('Weapons available to buy:')
     for index, weapon in enumerate(available_weapons, start=1):
       print(f'[{index}] {weapon["name"]}, power [{weapon["power"]}], price ${weapon["price"]}')
@@ -245,7 +243,7 @@ class Game:
     weapon_index = int(input('Choose a weapon: '))
     if 1 <= weapon_index <= len(available_weapons):
       selected_weapon = available_weapons[weapon_index - 1]
-      if selected_weapon['price'] > player[0]['money']:
+      if selected_weapon['price'] > player['money']:
         print('You don\'t have enough money to purchase this weapon.')
         input('Press enter to continue...')
         clear_screen()
@@ -256,9 +254,9 @@ class Game:
             confirmation = input('Are you sure want to buy this item (Yes/No)? ').lower()
             if confirmation in ['yes', 'y']:
               # HANDLE CURRENT POWER VS POWER THAT PLAYER BOUGHT
-              player[0]['money'] -= selected_weapon['price']
-              player[0]['weapon'] = selected_weapon['name']
-              player[0]['power'] = selected_weapon['power']
+              player['money'] -= selected_weapon['price']
+              player['weapon'] = selected_weapon['name']
+              player['power'] = selected_weapon['power']
               print(f'You bought {selected_weapon["name"]} and your current power is {selected_weapon["power"]}.\n')
               input('Press enter to continue...')
               clear_screen()
@@ -332,7 +330,7 @@ class Game:
         print(f"Name: {current_monster['name']}, Health: {current_monster['health']}, Power: {current_monster['power']}, Reward: ${current_monster['reward']}\n")
 
         print("1. go to the shop")
-        print("2. fight the monster")
+        print(f"2. fight the {current_monster['name']}")
         print("0. leave the cave")
 
         option = int(input("Choose an option: "))
@@ -355,7 +353,7 @@ class Game:
             fight_choices = ['a', 'l']
             while True:
               print("Player status")
-              print(f"Health: {player[0]['health']}, Power: {player[0]['power']}, Weapon: {player[0]['weapon']}\n")
+              print(f"Health: {player['health']}, Power: {player['power']}, Weapon: {player['weapon']}\n")
 
               print("Monster status")
               print(f"Health: {current_monster['health']}, Power: {current_monster['power']}, Reward: ${current_monster['reward']}\n")
@@ -371,30 +369,28 @@ class Game:
 
               # ATTACK THE MONSTER BASEMENT
               if action == 'a':
-                player_power = player[0]['power']
+                player_power = player['power']
                 monster_power = current_monster['power']
 
-                # Calcular dano sofrido pelo jogador
                 player_damage_taken = self.calculate_damage_taken(monster_power, player_power)
-                player[0]['health'] -= player_damage_taken
+                player['health'] -= player_damage_taken
 
-                # Calcular dano causado ao monstro
                 monster_damage_taken = self.calculate_damage_taken(player_power, monster_power)
                 current_monster['health'] -= monster_damage_taken
 
                 # CHECK THE OUTCOMER
                 if current_monster['health'] <= 0:
                     print(f"You defeated the {current_monster['name']} and earned ${current_monster['reward']}!")
-                    player[0]['money'] += current_monster['reward']
-                    player[0]['monsters'] += 1
+                    player['money'] += current_monster['reward']
+                    player['monsters'] += 1
                     # Reset monster's current health to its original health for the next encounter
                     current_monster['health'] = current_monster['original_health']
                     input('Press enter to continue...')
                     clear_screen()
                     continue
-                elif player[0]["health"] <= 0:
+                elif player["health"] <= 0:
                   clear_screen()
-                  print(f"You died!\nYou fought bravely and defeated {player[0]['monsters']} monsters in total.")
+                  print(f"You died!\nYou fought bravely and defeated {player['monsters']} monsters in total.")
                   if not self.revive_player():
                     print('Game Over!')
                     exit()
@@ -431,18 +427,18 @@ class Game:
   def revive_player(self):
     while True:
       try:
-        print(f"Your current money is ${player[0]['money']}")
+        print(f"Your current money is ${player['money']}")
         revive_option = input("Revive cost $20. Would you like to revive? (Yes/No): ").lower()
         clear_screen()
 
         if revive_option in ['yes', 'y']:
-          if player[0]['money'] < 20:
-            print("You don't have enough money for a revival.\n")
+          if player['money'] < 20:
+            print("You don't have enough money for a revival.")
             exit
             return False
           
-          player[0]['health'] = 30  # Reset health
-          player[0]['money'] -= 20
+          player['health'] = 30  # Reset health
+          player['money'] -= 20
           print("You have been revived!\n")
           return True
 
@@ -466,3 +462,90 @@ class Game:
         input('Press enter to continue...')
         clear_screen()
         continue
+
+
+  def boss(self):
+    choices = [1, 2, 0]
+    while True:
+      try:
+        print(f"Boss status\nName: {boss['name']}, Health: {boss['health']}, Power: {boss['power']}\n")
+
+        print("1. go to the shop")
+        print(f"2. fight the {boss['name']}")
+        print("0. leave the forest")
+
+        option = int(input("Choose an option: "))
+        clear_screen()
+
+        if option not in choices:
+          print(f"Invalid choice: {option}! Please, choose a valid option.")
+          input("Press enter to continue...")
+          continue
+
+        if option == 1:
+          print("Going to the shop... ")
+          self.shop()
+          clear_screen()
+
+        elif option == 2:
+          fight_choice = ['a', 'l']
+          while True:
+            print("Player status")
+            print(f"Health: {player['health']}, Power: {player['power']}, Weapon: {player['weapon']}\n")
+
+            print("Boss status")
+            print(f"Health: {boss['health']}, Power: {boss['power']}\n")
+
+            action = input("a. to attack\nl. leave the boss forest\nChoose an action: ").lower()
+            clear_screen()
+
+            if action not in fight_choice:
+              print(f"Invalid action: {action}! Please, choose a valid action.")
+              input("Press enter to continue...")
+              clear_screen()
+              continue
+
+            if action == 'a':
+              player_damage_taken = self.calculate_damage_taken(boss['power'], player['power'])
+              boss_damage_taken = self.calculate_damage_taken(player['power'], boss['power'])
+
+              player['health'] -= player_damage_taken
+              boss['health'] -= boss_damage_taken
+
+              # Verificar se o boss foi derrotado
+              if boss['health'] <= 0:
+                  print(f"You defeated the {boss['name']} and completed the game\nCongratulations!")
+                  input("Press enter to leave the program...")
+                  clear_screen()
+                  print(f"Congratulations! You have successfully defeated {player['monsters']} monsters, including the mighty boss. Your bravery is unmatched!")
+                  exit()
+
+              # Verificar se o jogador morreu
+              if player["health"] <= 0:
+                  clear_screen()
+                  print("You died! You fought bravely.")
+                  if not self.revive_player():
+                      print("Game Over!")
+                      exit()
+                  clear_screen()
+                  return
+
+                    
+            elif action == 'l':
+              print("Leaving the boss forest...")
+              clear_screen()
+              return
+
+        elif option == 0:
+          print("Exiting the forest...")
+          clear_screen()
+          return
+
+      except ValueError:
+        print("Invalid input! Please, try again.")
+        input("Press enter to continue...")
+        clear_screen()
+      except Exception as e:
+        print(f"An error occurred: {e}! Please, try again.")
+        input("Press enter to continue...")
+        clear_screen()
