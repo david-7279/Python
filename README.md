@@ -142,4 +142,4 @@ To run any of these projects on your local machine, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/python-beginners-project.git
+   git clone https://github.com/david-7279/Python.git
