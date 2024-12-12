@@ -1,0 +1,28 @@
+[
+  {
+      "title": "Pancakes",
+      "ingredients": [
+          {"name": "Flour", "quantity": 200, "unit": "grams"},
+          {"name": "Milk", "quantity": 0.5, "unit": "liter"},
+          {"name": "Egg", "quantity": 2, "unit": "pieces"}
+      ],
+      "steps": [
+          "Mix flour, milk, and eggs in a bowl.",
+          "Heat a frying pan and pour in a portion of the batter.",
+          "Cook on both sides until golden brown."
+      ]
+  },
+  {
+      "title": "Tomato Soup",
+      "ingredients": [
+          {"name": "Tomato", "quantity": 3, "unit": "pieces"},
+          {"name": "Garlic", "quantity": 2, "unit": "cloves"},
+          {"name": "Water", "quantity": 1, "unit": "liter"}
+      ],
+      "steps": [
+          "Chop the tomatoes and garlic.",
+          "Boil water in a pot, add the tomatoes and garlic.",
+          "Simmer for 20 minutes and blend until smooth."
+      ]
+  }
+]
