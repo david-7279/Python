@@ -237,11 +237,3 @@ class Ingredient:
     input('\nPress enter to continue...')
     clear_screen()
     return
-    if not self.ingredients:
-      print('No ingredients in the list')
-      input('Press enter to continue...')
-      clear_screen()
-      return
-    
-    with open(file_path, 'w') as file:
-      json.dump(self.ingredients, file, indent=4)

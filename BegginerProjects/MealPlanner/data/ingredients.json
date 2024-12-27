@@ -1,62 +1,62 @@
 [
     {
-      "name": "Tomato",
-      "quantity": 5,
-      "unit": "Pieces",
-      "calories": 22
+        "name": "Tomato",
+        "quantity": 5,
+        "unit": "Pieces",
+        "calories": 22
     },
     {
-      "name": "Milk",
-      "quantity": 1,
-      "unit": "Liter",
-      "calories": 42
+        "name": "Milk",
+        "quantity": 1,
+        "unit": "Liter",
+        "calories": 42
     },
     {
-      "name": "Flour",
-      "quantity": 1000,
-      "unit": "Grams",
-      "calories": 364
+        "name": "Flour",
+        "quantity": 1000,
+        "unit": "Grams",
+        "calories": 364
     },
     {
-      "name": "Sugar",
-      "quantity": 500,
-      "unit": "Grams",
-      "calories": 387
+        "name": "Sugar",
+        "quantity": 500,
+        "unit": "Grams",
+        "calories": 387
     },
     {
-      "name": "Butter",
-      "quantity": 200,
-      "unit": "Grams",
-      "calories": 717
+        "name": "Butter",
+        "quantity": 200,
+        "unit": "Grams",
+        "calories": 717
     },
     {
-      "name": "Egg",
-      "quantity": 12,
-      "unit": "Pieces",
-      "calories": 155
+        "name": "Egg",
+        "quantity": 12,
+        "unit": "Pieces",
+        "calories": 155
     },
     {
-      "name": "Salt",
-      "quantity": 100,
-      "unit": "Grams",
-      "calories": 0
+        "name": "Salt",
+        "quantity": 100,
+        "unit": "Grams",
+        "calories": 0
     },
     {
-      "name": "Olive Oil",
-      "quantity": 250,
-      "unit": "Ml",
-      "calories": 884
+        "name": "Olive Oil",
+        "quantity": 250,
+        "unit": "Ml",
+        "calories": 884
     },
     {
-      "name": "Chicken Breast",
-      "quantity": 2,
-      "unit": "Pieces",
-      "calories": 165
+        "name": "Chicken Breast",
+        "quantity": 2,
+        "unit": "Pieces",
+        "calories": 165
     },
     {
-      "name": "Carrot",
-      "quantity": 6,
-      "unit": "Pieces",
-      "calories": 41
+        "name": "Carrot",
+        "quantity": 6,
+        "unit": "Pieces",
+        "calories": 41
     }
-  ]
+]
