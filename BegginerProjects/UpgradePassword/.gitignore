@@ -1,0 +1,13 @@
+# Ignore log files
+*.log
+
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+
+# Ignore specific files or directories
+# Replace 'filename'  to ignore
+
+# Ignore all files in a specific directory
+# Replace 'directory_name/' to ignore
