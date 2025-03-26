@@ -14,16 +14,16 @@ def user_password():
         print("Your password was store sucessufully!")
         sleep(1)
         clear()
-        print("We are characterizing your password...")
-        sleep(1)
-        return password
+        characterizing(password)
+        return
     except Exception as e:
       print(f"An unexpected error occurred '{e}'.")
       clear_input()
-  return password
 
 
 # CHARACTERIZING
 def characterizing(password):
-  pass
+  print("We are characterizing your password...")
+  sleep(1)
+
   
