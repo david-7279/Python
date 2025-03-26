@@ -25,5 +25,34 @@ def user_password():
 def characterizing(password):
   print("We are characterizing your password...")
   sleep(1)
+  clear()
 
-  
+  letters = []
+  numbers = []
+  special = []
+
+  for p in password:
+    if p.isalpha():
+      letters.append(p)
+    elif p.isdigit():
+      numbers.append(p)
+    else:
+      special.append(p)
+
+  # Depis verifica o tamanho da lista tanto como letras, special characters e numeros
+  length = len(password)
+  lettersLength = len(letters)
+  numbersLength = len(numbers)
+  specialLength = len(special)
+
+  print(f"Passowrd length: '{length}'")
+  print(f"Letters: '{lettersLength}', Numbers: '{numbersLength}', Special Characters: '{specialLength}'")
+ 
+  if length <= 8 and numbersLength <= 4 and specialLength <= 2:
+    print("Your password is WEAK\n")
+  elif length > 8 and numbersLength > 4 and specialLength > 2:
+    print("Your password is MODERATE\n")
+  elif length >= 24 and numbersLength >= 12 and specialLength >= 16:
+    print("Your password is STRONG\n")
+
+  clear_input()
