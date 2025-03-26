@@ -50,9 +50,11 @@ def characterizing(password):
  
   if length <= 8 and numbersLength <= 4 and specialLength <= 2:
     print("Your password is WEAK\n")
-  elif length > 8 and numbersLength > 4 and specialLength > 2:
-    print("Your password is MODERATE\n")
-  elif length >= 24 and numbersLength >= 12 and specialLength >= 16:
-    print("Your password is STRONG\n")
+  elif length <= 16 or (numbersLength > 4 and specialLength > 2):
+      print("Your password is MODERATE\n")
+  elif length > 24 or (numbersLength > 12 and specialLength > 12):
+      print("Your password is STRONG\n")
+  else:
+    print("Your password exceeds the defined criteria\n")
 
   clear_input()
