@@ -1,4 +1,4 @@
-from models.clear_screen import clear
+from models.clear_screen import clear, clear_input
 from time import sleep
 
 # MAIN MENU
@@ -12,22 +12,16 @@ def main_menu_option():
                 return option
             else:
                 print(f"Invalid option '{option}'! Please enter a number between 0 and 3.")
-                sleep(1)
-                input("Press enter to continue...")
-                clear()
+                clear_input()
                 main_menu()
         except ValueError:
             clear()
             print(f"Invalid input! Please enter a number between 0 and 3.")
-            sleep(1)
-            input("Press enter to continue...")
-            clear()
+            clear_input()
             main_menu()
         except Exception as e:
             print(f"An unexpected error occurred '{e}'.")
-            sleep(1)
-            input("Press enter to continue...")
-            clear()
+            clear_input()
 
 
 def main_menu():
@@ -57,15 +51,11 @@ def main_menu():
         elif confirmation in ['n', 'no']:
           clear()
           print("I'm glad you are not leaving!")
-          sleep(1)
-          input("Press enter to continue...")
-          clear()
+          clear_input()
           break
         else:
           print(f"\nInvalid confirmation '{confirmation}'! Please, choose an valid confirmation (Yes or No).")
-          sleep(1)
-          input("Press enter to continue...")
-          clear()
+          clear_input()
           continue
     case _:
       pass

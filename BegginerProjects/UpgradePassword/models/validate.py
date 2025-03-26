@@ -1,4 +1,4 @@
-from models.clear_screen import clear
+from models.clear_screen import clear, clear_input
 from time import sleep
 
 # USER PASSOWRD
@@ -8,9 +8,7 @@ def user_password():
       password = input('Enter your password: ')
       if password == '' or len(password) == 0:
         print(f"Empty password! Please enter an valid password")
-        sleep(1)
-        input("Press enter to continue...")
-        clear()
+        clear_input()
         continue
       else:
         print("Your password was store sucessufully!")
@@ -21,10 +19,7 @@ def user_password():
         return password
     except Exception as e:
       print(f"An unexpected error occurred '{e}'.")
-      sleep(1)
-      input("Press enter to continue...")
-      clear()
-  
+      clear_input()
   return password
 
 
