@@ -1,10 +1,9 @@
-from models.menu import main_menu
-from models.validate import user_password
-from models.clear_screen import clear
+from ui import clear, main_menu
+from core import password_validator
 
 if __name__ == "__main__":
     while True:  
       clear()
-      user_password()
+      password_validator()
       clear()
       main_menu()

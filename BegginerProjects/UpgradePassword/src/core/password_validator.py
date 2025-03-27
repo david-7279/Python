@@ -1,4 +1,4 @@
-from models.clear_screen import clear, clear_input
+from ui.utils import clear, clear_input
 from time import sleep
 
 # USER PASSOWRD
@@ -39,7 +39,6 @@ def characterizing(password):
     else:
       special.append(p)
 
-  # Depis verifica o tamanho da lista tanto como letras, special characters e numeros
   length = len(password)
   lettersLength = len(letters)
   numbersLength = len(numbers)

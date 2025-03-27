@@ -1,4 +1,4 @@
-from models.clear_screen import clear, clear_input
+from ui.utils import clear, clear_input
 from time import sleep
 
 # MAIN MENU
@@ -31,9 +31,11 @@ def main_menu():
   print("0. Exit the Program")
 
   option = main_menu_option()
+  # _weak = Weak()
   
   match option:
     case 1:
+      # _weak.upgrade()
       pass
     case 2:
       pass

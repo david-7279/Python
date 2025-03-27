@@ -7,7 +7,7 @@ __pycache__/
 
 
 # Ignore specific files or directories
-# Replace 'filename'  to ignorej
+tests
 
 # Ignore all files in a specific directory
 # Replace 'directory_name/' to ignore
