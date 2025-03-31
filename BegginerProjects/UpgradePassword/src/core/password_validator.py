@@ -1,4 +1,5 @@
 from ..ui.utils import clear, clear_input
+from ..core.password_upgrader import Upgrader
 from time import sleep
 
 class Validator:
