@@ -4,7 +4,12 @@ from time import sleep
 
 class Validator:
   def __init__(self):
-    pass
+    self.password = None
+    self.length = 0
+    self.letters_count = 0
+    self.numbers_count = 0
+    self.special_count = 0
+    self.strength = None
 
   # USER PASSOWRD
   def user_password(self):
@@ -19,6 +24,7 @@ class Validator:
           print("Your password was store sucessufully!")
           sleep(1)
           clear()
+          self.password = password
           self.characterizing(password)
           return
       except Exception as e:
@@ -44,21 +50,25 @@ class Validator:
       else:
         special.append(p)
 
-    length = len(password)
-    lettersLength = len(letters)
-    numbersLength = len(numbers)
-    specialLength = len(special)
+    self.length = len(password)
+    self.letters_count = len(letters)
+    self.numbers_count = len(numbers)
+    self.special_count = len(special)
 
-    print(f"Passowrd length: '{length}'")
-    print(f"Letters: '{lettersLength}', Numbers: '{numbersLength}', Special Characters: '{specialLength}'")
+    print(f"Passowrd length: '{self.length}'")
+    print(f"Letters: '{self.letters_count}', Numbers: '{self.numbers_count}', Special Characters: '{self.special_count}'")
   
-    if length > 1 and numbersLength <= 4 and specialLength <= 2:
+    if self.length > 1 and self.numbers_count <= 4 and self.special_count <= 2:
+      self.strength = "WEAK"
       print("Your password is WEAK\n")
-    elif length > 12 and (numbersLength > 4 or specialLength > 2):
+    elif self.length > 12 and (self.numbers_count > 4 or self.special_count > 2):
+        self.strength = "MODERATE"
         print("Your password is MODERATE\n")
-    elif length > 24 or (numbersLength > 12 and specialLength > 12):
+    elif self.length > 24 or (self.numbers_count > 12 and self.special_count > 12):
+        self.strength = "STRONG"
         print("Your password is STRONG\n")
     else:
+      self.strength = "STRONG"
       print("Your password exceeds the defined criteria\n")
 
     clear_input()
