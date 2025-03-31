@@ -1,4 +1,4 @@
-from ui.utils import clear, clear_input
+from .utils import clear, clear_input
 from time import sleep
 
 # MAIN MENU
