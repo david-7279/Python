@@ -1,3 +1,3 @@
-from .specialCharacters import specialCharacters
+from .data import data
 
-__all__ = ["specialCharacters"]
+__all__ = ["data"]
