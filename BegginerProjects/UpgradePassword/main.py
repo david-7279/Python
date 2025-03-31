@@ -1,12 +1,12 @@
-from src.ui import clear
 from src.core import Validator
-from src.ui import Menu
+from src.ui import Menu, Utils
 
 if __name__ == "__main__":
   validator = Validator()
   menu = Menu()
+  utils = Utils()
   while True:  
-    clear()
+    utils.clear()
     validator.user_password()
-    clear()
+    utils.clear()
     menu.main_menu(validator)
