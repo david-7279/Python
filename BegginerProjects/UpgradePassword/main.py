@@ -2,11 +2,9 @@ from src.ui import clear, main_menu
 from src.core import Validator
 
 if __name__ == "__main__":
+  validator = Validator()
   while True:  
     clear()
-
-    default_password = Validator()
-    default_password.user_password()
-        
+    validator.user_password()
     clear()
-    main_menu()
+    main_menu(validator)
