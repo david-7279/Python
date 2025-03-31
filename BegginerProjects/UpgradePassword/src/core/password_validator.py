@@ -1,4 +1,4 @@
-from ..ui.utils import clear, clear_input
+from ..ui.utils import Utils
 from ..core.password_upgrader import Upgrader
 from time import sleep
 
@@ -13,30 +13,32 @@ class Validator:
 
   # USER PASSOWRD
   def user_password(self):
+    utils = Utils()
     while True:
       try:
         password = input('Enter your password: ')
         if password == '' or len(password) == 0:
           print(f"Empty password! Please enter an valid password")
-          clear_input()
+          utils.clear_input()
           continue
         else:
           print("Your password was store sucessufully!")
           sleep(1)
-          clear()
+          utils.clear()
           self.password = password
           self.characterizing(password)
           return
       except Exception as e:
         print(f"An unexpected error occurred '{e}'.")
-        clear_input()
+        utils.clear_input()
 
 
   # CHARACTERIZING
   def characterizing(self, password):
+    utils = Utils()
     print("We are characterizing your password...")
     sleep(1)
-    clear()
+    utils.clear()
 
     letters = []
     numbers = []
@@ -71,4 +73,4 @@ class Validator:
       self.strength = "STRONG"
       print("Your password exceeds the defined criteria\n")
 
-    clear_input()
+    utils.clear_input()

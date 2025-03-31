@@ -1,4 +1,4 @@
-from ..ui import clear_input
+from ..ui import Utils
 import random
 
 class Weak:
@@ -15,6 +15,7 @@ class Weak:
 
 
   def weak_confirmation(self):
+    utils = Utils()
     while True:
       try:
         confirmation = input("\nWant to upgrade your password? (Yes/No) ").lower()
@@ -22,16 +23,16 @@ class Weak:
           self.weak_upgrade()
         elif confirmation in ['no', 'n']:
           print("Your password remains the same!")
-          clear_input()
+          utils.clear_input()
           break
         else:
           print(f"\nInvalid confirmation '{confirmation}'! Please, choose an valid confirmation (Yes or No).")
-          clear_input()
+          utils.clear_input()
           self.weak_info()
           continue
       except Exception as e:
         print(f"An unexpected error occurred '{e}'.")
-        clear_input()
+        utils.clear_input()
 
 
   def weak_upgrade(self):
